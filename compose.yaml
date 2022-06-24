@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  eureka-server:
+    image: eureka:eureka #nombre de la imagen que hemos creado
+    restart: always
+    container_name: eureka
+    ports:
+      - '8761:8761'
+    networks:
+      - 'docker-network'
+  zuul-service:
+    image: zuul:zuul #nombre de la imagen que hemos creado
+    restart: always
+    container_name: zuul
+    ports:
+      - '7000:7000'
+    networks:
+      - 'docker-network'
+  basico-microservicio:
+    image: basico-microservicio:basico-microservicio #nombre de la imagen que hemos creado
+    restart: always
+    container_name: basico-microservicio
+    networks:
+      - 'docker-network'
+networks:
+  docker-network: #necesitamos crear en una red para alojar los servicios en ella y que puedan comunicarse entre sí
